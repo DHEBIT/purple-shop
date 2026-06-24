@@ -10,7 +10,10 @@ export default function Navbar() {
     <nav className="bg-purple-900 px-8 py-4 flex justify-between items-center sticky top-0 z-50 shadow-lg">
       <h1 className="text-2xl font-bold text-white cursor-pointer" onClick={() => router.push('/')}>💜 Purple Shop</h1>
       <div className="flex items-center gap-6">
-        <span className="text-purple-200 text-sm hidden md:block">by Bernardventures</span>
+       <div className="hidden md:flex items-center gap-6">
+  <span className="text-purple-200 text-sm">by Bernardventures</span>
+  <a href="/contact" className="text-purple-200 hover:text-white text-sm transition-all">Contact</a>
+</div>
         <button className="text-white text-sm border border-purple-400 px-4 py-1 rounded-full hover:bg-purple-700">Sign In</button>
         <div className="relative cursor-pointer" onClick={() => router.push('/cart')}>
           <span className="text-white text-2xl">🛒</span>

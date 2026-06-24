@@ -127,7 +127,7 @@ export default function CartPage() {
         </div>
       </div>
       <footer className="bg-purple-900 text-center py-8 text-purple-300 text-sm mt-12">
-        © 2026 Bernardventures. All rights reserved. 💜
+        © 2026 BernardDrah. All rights reserved. 💜
       </footer>
     </main>
   )
