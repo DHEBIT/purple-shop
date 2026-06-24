@@ -1,22 +1,37 @@
 'use client'
+import React from 'react'
 import { useCart } from '../CartContext'
 import { useRouter } from 'next/navigation'
-import { usePaystackPayment } from 'react-paystack'
+import dynamic from 'next/dynamic'
 
 function PaystackButton({ total }: { total: number }) {
   const config = {
     reference: new Date().getTime().toString(),
     email: 'customer@example.com',
     amount: total * 100,
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY || '',
   }
-  const initializePayment = usePaystackPayment(config)
+
+  const [PaystackHook, setPaystackHook] = React.useState<any>(null)
+
+  React.useEffect(() => {
+    import('react-paystack').then((mod) => {
+      setPaystackHook(() => mod.usePaystackPayment)
+    })
+  }, [])
+
+  const handlePayment = () => {
+    if (!PaystackHook) return
+    const initializePayment = PaystackHook(config)
+    initializePayment({
+      onSuccess: () => alert('Payment successful! 🎉'),
+      onClose: () => alert('Payment cancelled'),
+    })
+  }
+
   return (
     <button
-      onClick={() => initializePayment({
-        onSuccess: () => alert('Payment successful! 🎉'),
-        onClose: () => alert('Payment cancelled'),
-      })}
+      onClick={handlePayment}
       className="w-full bg-purple-700 hover:bg-purple-600 text-white py-3 rounded-full font-bold transition-all mb-3"
     >
       Proceed to Checkout 💳
