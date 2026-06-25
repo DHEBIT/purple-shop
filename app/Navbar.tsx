@@ -14,7 +14,7 @@ export default function Navbar() {
   <span className="text-purple-200 text-sm">by Bernardventures</span>
   <a href="/contact" className="text-purple-200 hover:text-white text-sm transition-all">Contact</a>
 </div>
-        <button className="text-white text-sm border border-purple-400 px-4 py-1 rounded-full hover:bg-purple-700">Sign In</button>
+        <button onClick={() => router.push('/auth')} className="text-white text-sm border border-purple-400 px-4 py-1 rounded-full hover:bg-purple-700">Sign In</button>
         <div className="relative cursor-pointer" onClick={() => router.push('/cart')}>
           <span className="text-white text-2xl">🛒</span>
           {itemCount > 0 && (
